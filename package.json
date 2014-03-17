@@ -1,0 +1,43 @@
+{
+  "name": "life.react",
+  "main": "index.js",
+  "version": "0.0.1",
+  "description": "Conway's game of life rendered with reactjs",
+  "scripts": {
+    "pretest": "jshint --reporter node_modules/jshint-stylish/stylish.js lib test",
+    "test": "mocha --recursive -R nyan test/",
+    "watch": "watchify lib/index.jsx -t reactify -d -o index.js -v",
+    "browserify": "browserify lib/index.jsx -t reactify -d > index.js",
+    "examplify": "watchify example/js/index.jsx -t reactify -d -o example/js/index.js -v",
+    "buildex": "browserify example/js/index.jsx -t reactify -d > example/js/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/landau/life.react.git"
+  },
+  "keywords": [
+    "conway",
+    "life"
+  ],
+  "author": "Trevor Landau <landautrevor@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/landau/life.react/issues"
+  },
+  "homepage": "http://trevorlandau.net/life.html",
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "envify": "^1.2.1",
+    "react": "^0.9.0",
+    "is-predicate": "^0.3.1"
+  },
+  "devDependencies": {
+    "mocha": "^1.18.0",
+    "reactify": "^0.10.0",
+    "browserify": "^3.32.1",
+    "watchify": "^0.6.2",
+    "jshint-stylish": "^0.1.5",
+    "jshint": "^2.4.4",
+    "chai": "^1.9.0"
+  }
+}
