@@ -1,4 +1,4 @@
-react-life
+life.react
 ==========
 
-Conways Game of Life build on React
+Conway's Game of Life rendered via reactjs
