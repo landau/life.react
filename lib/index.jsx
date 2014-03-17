@@ -45,7 +45,7 @@ module.exports = React.createClass({
 
   tick: function tick() {
     var self = this;
-    requestAnimationFrame(function tick() {
+    requestAnimationFrame(function requestAnim() {
       self.setState({
         matrix: life.tick(self.state.matrix)
       });
@@ -61,9 +61,9 @@ module.exports = React.createClass({
     var ctx = canvas.getContext('2d');
     matrix.forEach(function rowEach(row, y) {
       row.forEach(function cellEach(cell, x) {
-        var yCoord = y * cellSize + 1;
-        var xCoord = x * cellSize + 1;
-        var size = cellSize - this.props.cellSpacing; // give some spacing
+        var yCoord = (y * cellSize) + 1;
+        var xCoord = (x * cellSize) + 1;
+        var size = cellSize - this.props.cellSpacing;
 
         ctx.fillStyle = is.ternary(
           is.equal(cell, life.ALIVE),

@@ -1,7 +1,7 @@
 {
   "name": "life.react",
   "main": "index.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Conway's game of life rendered with reactjs",
   "scripts": {
     "pretest": "jshint --reporter node_modules/jshint-stylish/stylish.js lib test",
@@ -9,7 +9,8 @@
     "watch": "watchify lib/index.jsx -t reactify -d -o index.js -v",
     "browserify": "browserify lib/index.jsx -t reactify -d > index.js",
     "examplify": "watchify example/js/index.jsx -t reactify -d -o example/js/index.js -v",
-    "buildex": "browserify example/js/index.jsx -t reactify -d > example/js/index.js"
+    "buildex": "browserify example/js/index.jsx -t reactify -d > example/js/index.js",
+    "fullbuild": "npm run browserify && npm run buildex"
   },
   "repository": {
     "type": "git",
