@@ -45,12 +45,13 @@ module.exports = React.createClass({
 
   tick: function tick() {
     var self = this;
-    requestAnimationFrame(function requestAnim() {
+    setTimeout(function requestAnim() {
       self.setState({
-        matrix: life.tick(self.state.matrix)
+        matrix: life.tick(self.state.matrix),
+        old: self.state.matrix
       });
-      requestAnimationFrame(self.tick);
-    });
+      self.tick();
+    }, 1e3 / this.props.fps);
   },
 
   update: function update() {
@@ -59,8 +60,18 @@ module.exports = React.createClass({
     var cellSize = this.props.cellSize;
 
     var ctx = canvas.getContext('2d');
-    matrix.forEach(function rowEach(row, y) {
-      row.forEach(function cellEach(cell, x) {
+
+    var l = matrix.length;
+    for (var y = 0; y < l; y += 1) {
+
+      var rowL = matrix[y].length;
+      for (var x = 0; x < rowL; x += 1) {
+
+        var cell = matrix[y][x];
+
+        // if val has not changed don't bother
+        if (this.state.old && this.state.old[y][x] === cell) continue;
+
         var yCoord = (y * cellSize) + 1;
         var xCoord = (x * cellSize) + 1;
         var size = cellSize - this.props.cellSpacing;
@@ -72,14 +83,15 @@ module.exports = React.createClass({
         );
 
         ctx.fillRect(xCoord, yCoord, size, size);
-      }, this);
-    }, this);
+      }
+    }
   },
 
   render: function render() {
     return (
       <canvas 
-        height={this.props.height} width={this.props.width} 
+        height={this.props.height * (this.props.cellSize + this.props.cellSpacing)} 
+        width={this.props.width * (this.props.cellSize + this.props.cellSpacing)} 
         ref='canvas' 
       />
     );

@@ -6,16 +6,17 @@ var Life = require('../../lib/index.jsx');
 var is = require('is-predicate');
 
 var mount = document.querySelector('#game');
-var height = 500;
-var width = 500;
+var height = 150;
+var width = 130;
 
 var App = React.createClass({
   getInitialState: function getInitialState() {
     return {
-      cellSize: 5,
+      cellSize: 4,
       cellSpacing: 1,
       deadColor: '#f0f0f0',
-      aliveColor: '#369'
+      aliveColor: '#369',
+      fps: 30
     };
   },
 
@@ -24,7 +25,10 @@ var App = React.createClass({
   updateOption: function(e) {
     var update = {};
     var name = e.target.name;
-    var value = is.ternary(is.contains(this.nums, name), parseInt(e.target.value) || 0, e.target.value);
+    var value = is.ternary(is.contains(this.nums, name), 
+                           parseInt(e.target.value) || 0, 
+                           e.target.value
+                          );
     update[name] = value;
     this.setState(update);
   },
@@ -36,7 +40,8 @@ var App = React.createClass({
           <Life 
             height={this.props.height} width={this.props.width} 
             aliveColor={this.state.aliveColor} deadColor={this.state.deadColor}
-            cellSpacing={this.state.cellSpacing} 
+            cellSpacing={this.state.cellSpacing} cellSize={this.state.cellSize}
+            fps={this.state.fps}
           />
         </div>
 
@@ -60,10 +65,19 @@ var App = React.createClass({
               onChange={this.updateOption}
             />
           </div>
+
+          <div className='form-group'>
+            <label htmlFor='fps'>FPS</label>
+            <input 
+              className='form-control' name='fps' 
+              type='text' value={this.state.fps}
+              onChange={this.updateOption}
+            />
+          </div>
+
           <h5>Coming soon...</h5>
           <ul>
             <li>Start &amp; Stop</li>
-            <li>Cell Size</li>
             <li>Starting Patterns</li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 {
   "name": "life.react",
   "main": "index.js",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Conway's game of life rendered with reactjs",
   "scripts": {
     "pretest": "jshint --reporter node_modules/jshint-stylish/stylish.js lib test",
